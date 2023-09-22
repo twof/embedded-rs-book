@@ -54,11 +54,7 @@ fn main() -> ! {
                 break;
             }
         }
-        // TODO Receive a user request. Each user request ends with ENTER
-        // NOTE `buffer.push` returns a `Result`. Handle the error by responding
-        // with an error message.
 
-        // TODO Send back the reversed string
         let reverse_vec: Vec<&u8, 32> = Vec::from_iter(buffer.iter().rev());
         let reverse_char_vec: Vec<char, 32> = reverse_vec
             .into_iter()
@@ -73,6 +69,5 @@ fn main() -> ! {
         })
         .unwrap();
         nb::block!(serial.flush()).unwrap();
-        // nb::block!(foo).unwrap();
     }
 }
