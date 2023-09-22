@@ -8,7 +8,7 @@ use panic_rtt_target as _;
 use microbit::{
     board::Board,
     display::blocking::Display,
-    hal::{prelude::*, Timer},
+    hal::Timer,
 };
 use core::cmp::max;
 use core::cmp::min;
@@ -29,19 +29,11 @@ fn main() -> ! {
         [0, 0, 0, 0, 0],
     ];
 
-    // let mut x = 0;
-    // let mut y = 0;
-
     loop {
         for i in 0..16  {
             let pos = calculate_position(i);
             display_layout[pos.1][pos.0] = 1;
-
-             // Show light_it_all for 1000ms
-            display.show(&mut timer, display_layout, 100);
-            // clear the display again
-            // display.clear();
-            // timer.delay_ms(1000_u32);
+            display.show(&mut timer, display_layout, 10);
             display_layout[pos.1][pos.0] = 0;
         }
     }
