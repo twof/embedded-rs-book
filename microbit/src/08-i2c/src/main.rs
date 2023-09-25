@@ -77,8 +77,14 @@ fn main() -> ! {
         };
 
         match command_result {
-            Ok(data) => rprintln!("Acceleration: x {} y {} z {}", data.x, data.y, data.z),
-            Err(message) => rprintln!("{}", message),
-        }
+            Ok(data) => write!(
+                serial,
+                "Measurement: x: {}, y: {}, z: {}",
+                data.x, data.y, data.z
+            ),
+            Err(message) => write!(serial, "{}", message),
+        };
+
+        write!(serial, "\n\r");
     }
 }
