@@ -71,10 +71,7 @@ fn main() -> ! {
         let command_string = from_utf8(&buffer).ok().unwrap();
 
         let command_result: Result<Measurement, &str> = match command_string {
-            "magnetometer" => sensor.mag_data().map_err(|err| {
-                rprintln!("Magnetometer error: {:?}", err);
-                "Magnetometer error: {err}"
-            }),
+            "magnetometer" => Result::Ok(nb::block!(sensor.mag_data()).unwrap()),
             "accelerometer" => Result::Ok(sensor.accel_data().unwrap()),
             _ => Result::Err("Unknown command"),
         };
